@@ -62,23 +62,26 @@ var sfoaListener = {
 					calendarEntry.pop();
 					calendarEntry = calendarEntry.join("");
 					calendarEntry = atob(calendarEntry);
-					
+
 					elem.style.display = "block";
 					if(button !== null) {
 						button.style.display = "block";
 					}
-					
-					var download = function() {
-						var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
-						const {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm", {});
-						var file = OS.Path.join(OS.Constants.Path.tmpDir, "sfoa-" + (new Date().getYear()+1900) + (new Date().getMonth()+1) + new Date().getDate() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + ".ics");
-						var downloadPromise = Downloads.createDownload({source: url, target: file});
-						downloadPromise.then(function success(d) {
-							d.start();
-							alert("Saved ICS: " + file)
-						});
+
+					var download = function(e) {
+						// Only left clicks
+						if(e.which === 1) {
+							var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
+							const {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm", {});
+							var file = OS.Path.join(OS.Constants.Path.tmpDir, "sfoa-" + (new Date().getYear()+1900) + (new Date().getMonth()+1) + new Date().getDate() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + ".ics");
+							var downloadPromise = Downloads.createDownload({source: url, target: file});
+							downloadPromise.then(function success(d) {
+								d.start();
+								alert("Saved ICS: " + file)
+							});
+						}
 					}
-					
+
 					elem.onclick = download;
 					if(button !== null) {
 						button.onclick = download;
@@ -86,7 +89,7 @@ var sfoaListener = {
 				} else {
 					console.log("SFOA: Alternative part but no calendar entry found");
 				}
-			
+
 				return false;
 			});
 		});
