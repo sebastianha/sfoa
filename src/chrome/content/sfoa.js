@@ -40,15 +40,15 @@ var sfoaListener = {
 
 	scanMessageForAppointment: function(aContext) {
 		return this.ensureCurrentMessagePrepared(aContext).then((aContext) => {
+			// Get appointment indicator
+			var elem = document.getElementById("outlook-appointment-outer");
+			elem.style.display = "none";
 			// Get button in bar and hide if available
 			var button = document.getElementById("outlook-appointment-button");
 			if(button !== null) {
 				button.style.display = "none";
 			}
-			// Get appointment indicator
-			var elem = document.getElementById("outlook-appointment-outer");
-			elem.style.display = "none";
-			
+
 			if(!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
 				console.log("SFOA: No alternative part found");
 				return false;
@@ -78,12 +78,6 @@ var sfoaListener = {
 					calendarEntry = calendarEntry.join("");
 					calendarEntry = atob(calendarEntry);
 
-					// Show indicator and button if available
-					elem.style.display = "block";
-					if(button !== null) {
-						button.style.display = "block";
-					}
-
 					// Download ics file to tmp dir
 					var download = function(e) {
 						// Only left clicks
@@ -103,8 +97,11 @@ var sfoaListener = {
 						}
 					}
 
+					// Show indicator and button if available
+					elem.style.display = "block";
 					elem.onclick = download;
 					if(button !== null) {
+						button.style.display = "block";
 						button.onclick = download;
 					}
 				} else {
