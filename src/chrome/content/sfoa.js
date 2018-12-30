@@ -14,7 +14,7 @@ var sfoaListener = {
 
 	// Load message headers
 	ensureCurrentMessagePrepared: function(aContext) {
-		if (aContext && aContext.headers) {
+		if(aContext && aContext.headers) {
 			return Promise.resolve(aContext);
 		}
 
@@ -24,8 +24,8 @@ var sfoaListener = {
 	},
 
 	// Load complete message
-	ensureCurrentMessageLoaded : function(aContext) {
-		if (aContext && aContext.message) {
+	ensureCurrentMessageLoaded: function(aContext) {
+		if(aContext && aContext.message) {
 			return Promise.resolve(aContext);
 		}
 
@@ -36,7 +36,7 @@ var sfoaListener = {
 		});
 	},
 
-	MULTIPART_ALTERNATIVE_MATCHER : /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
+	MULTIPART_ALTERNATIVE_MATCHER: /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 
 	scanMessageForAppointment: function(aContext) {
 		return this.ensureCurrentMessagePrepared(aContext).then((aContext) => {
@@ -49,7 +49,7 @@ var sfoaListener = {
 			var elem = document.getElementById("outlook-appointment-outer");
 			elem.style.display = "none";
 			
-			if (!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
+			if(!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
 				console.log("SFOA: No alternative part found");
 				return false;
 			}
@@ -116,23 +116,23 @@ var sfoaListener = {
 		});
 	},
 
-	collectSameTypeBodies : function(aMessage) {
+	collectSameTypeBodies: function(aMessage) {
 		var bodiesWithTypes = {};
 
 		var header = aMessage.split('\r\n\r\n')[0];
 		var boundaryMatch = header.match(this.MULTIPART_ALTERNATIVE_MATCHER);
-		if (!boundaryMatch)
+		if(!boundaryMatch)
 			return bodiesWithTypes;
 
 		var boundary = '--' + boundaryMatch[4];
 		var lastPart = [];
 		var checkPart = (function(aPart) {
 			var header = aPart.split('\r\n\r\n')[0];
-			if (/^Content-Type:[^\r]+(\r\n [^\r]+)*name=.+/im.test(header) || /^Content-Disposition:\s*attachment[^\r]+(\r\n [^\r]+)*filename.+/im.test(header))
+			if(/^Content-Type:[^\r]+(\r\n [^\r]+)*name=.+/im.test(header) || /^Content-Disposition:\s*attachment[^\r]+(\r\n [^\r]+)*filename.+/im.test(header))
 				return; // ignore regular attachments
 
 			var typeMatch = header.match(/^Content-Type:\s*([^\s]+)\s*/im);
-			if (typeMatch) {
+			if(typeMatch) {
 				let type = typeMatch[1];
 				bodiesWithTypes[type] = bodiesWithTypes[type] || [];
 				bodiesWithTypes[type].push(aPart);
@@ -141,11 +141,11 @@ var sfoaListener = {
 		
 		var inPreAlternativeParts = true;
 		aMessage.split('\r\n').forEach((aLine) => {
-			if (aLine != boundary) {
+			if(aLine != boundary) {
 				lastPart.push(aLine)
 				return;
 			}
-			if (inPreAlternativeParts) {
+			if(inPreAlternativeParts) {
 				inPreAlternativeParts = false;
 			} else {
 				checkPart(lastPart.join('\r\n'));
@@ -161,7 +161,7 @@ var sfoaListener = {
 	onEndHeaders: function() {
 		this.newMessageSelected();
 	},
-	onEndAttachments: function () {}
+	onEndAttachments: function() {}
 };
 
 
@@ -214,33 +214,33 @@ StreamMessageLoader.prototype = {
 		throw Components.results.NS_NOINTERFACE;
 	},
 
-	onStartRequest : function (aRequest, aContext) {
-		if (this._resolverHeaders)
+	onStartRequest: function(aRequest, aContext) {
+		if(this._resolverHeaders)
 			this.context.headers = '';
-		if (this._resolverAll)
+		if(this._resolverAll)
 			this.context.message = '';
 	},
 
-	onStopRequest : function (aRequest, aContext, aStatusCode) {
-		if (this._resolverHeaders) {
+	onStopRequest: function(aRequest, aContext, aStatusCode) {
+		if(this._resolverHeaders) {
 			this._resolverHeaders(this.context);
 			delete this._resolverHeaders;
 			delete this._rejectorHeaders;
 		}
-		if (this._resolverAll) {
+		if(this._resolverAll) {
 			this._resolverAll(this.context);
 			delete this._resolverAll;
 			delete this._rejectorAll;
 		}
 	},
 
-	onDataAvailable : function (aRequest, aContext, aInputStream, aOffset, aCount) {
+	onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {
 		var scriptStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance().QueryInterface(Components.interfaces.nsIScriptableInputStream);
 		scriptStream.init(aInputStream);
 		var data = scriptStream.read(scriptStream.available());
-		if (this._resolverHeaders)
+		if(this._resolverHeaders)
 			this.context.headers += data;
-		if (this._resolverAll)
+		if(this._resolverAll)
 			this.context.message += data;
 	}
 };
