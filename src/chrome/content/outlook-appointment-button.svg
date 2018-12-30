@@ -14,7 +14,7 @@
    width="16"
    fill="context-fill"
    fill-opacity="context-fill-opacity"
-   sodipodi:docname="fucking-outlook-appointment-icon.svg"
+   sodipodi:docname="outlook-appointment-icon.svg"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
   <metadata
      id="metadata35">
@@ -24,6 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,7 +42,7 @@
      id="namedview33"
      showgrid="false"
      inkscape:zoom="20.85965"
-     inkscape:cx="10.02921"
+     inkscape:cx="2.1192019"
      inkscape:cy="3.810489"
      inkscape:window-x="792"
      inkscape:window-y="120"

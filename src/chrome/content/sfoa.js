@@ -34,9 +34,11 @@ var sfoaListener = {
 
 	shouldApply : function(aContext) {
 		return this.ensureCurrentMessagePrepared(aContext).then((aContext) => {
-			var button = document.getElementById("fucking-outlook-appointment-button");
-			button.style.display = "none";
-			var elem = document.getElementById("fucking-outlook-appointment-outer");
+			var button = document.getElementById("outlook-appointment-button");
+			if(button !== null) {
+				button.style.display = "none";
+			}
+			var elem = document.getElementById("outlook-appointment-outer");
 			elem.style.display = "none";
 			
 			if (!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
@@ -62,7 +64,9 @@ var sfoaListener = {
 					calendarEntry = atob(calendarEntry);
 					
 					elem.style.display = "block";
-					button.style.display = "block";
+					if(button !== null) {
+						button.style.display = "block";
+					}
 					
 					var download = function() {
 						var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
@@ -76,7 +80,9 @@ var sfoaListener = {
 					}
 					
 					elem.onclick = download;
-					button.onclick = download;
+					if(button !== null) {
+						button.onclick = download;
+					}
 				} else {
 					console.log("SFOA: Alternative part but no calendar entry found");
 				}
@@ -213,8 +219,10 @@ StreamMessageLoader.prototype = {
 	}
 };
 
-
-window.addEventListener('DOMContentLoaded', function onDOMContentLoaded(aEvent) {
+// Add message listener on load of Thunderbird
+window.addEventListener("DOMContentLoaded", function onDOMContentLoaded(e) {
+	// Register message listener
 	gMessageListeners.push(sfoaListener);
-	window.removeEventListener(aEvent.type, onDOMContentLoaded, false);
+	// Remove itself to register message listener only once
+	window.removeEventListener(e.type, onDOMContentLoaded, false);
 }, false);

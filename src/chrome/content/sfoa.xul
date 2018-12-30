@@ -3,12 +3,12 @@
 	<script type="application/javascript" src="chrome://sfoa/content/sfoa.js"/>
 
 	<toolbar id="header-view-toolbar">
-		<toolbarbutton removable="true" id="fucking-outlook-appointment-button" class="toolbarbutton-1 msgHeaderView-button" label="Download ICS" tooltiptext="Download attached Outlook appointment" style="display: none; background-color: #0071c5; color: white; list-style-image: url('chrome://sfoa/content/fucking-outlook-appointment-icon.svg');"/>
+		<toolbarbutton removable="true" id="outlook-appointment-button" class="toolbarbutton-1 msgHeaderView-button" label="Download ICS" tooltiptext="Download attached Outlook appointment" style="display: none; background-color: #0071c5; color: white; list-style-image: url('chrome://sfoa/content/outlook-appointment-button.svg');"/>
 	</toolbar>
 
 	<hbox id="expandedHeadersBottomBox">
-		<vbox id="fucking-outlook-appointment-outer" style="display: none;" insertbefore="otherActionsBox">
-			<image src="chrome://sfoa/content/fucking-outlook-appointment.png" id="fucking-outlook-appointment-inner" style="width:110px; height:44px; margin-left:2px; margin-right:2px;"/>
+		<vbox id="outlook-appointment-outer" style="display: none;" insertbefore="otherActionsBox">
+			<image src="chrome://sfoa/content/outlook-appointment.png" id="outlook-appointment-inner" style="width:110px; height:44px; margin-left:2px; margin-right:2px;"/>
 			<spacer flex="1"/>
 		</vbox>
 	</hbox>
