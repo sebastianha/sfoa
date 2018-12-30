@@ -3,11 +3,9 @@ const { Promise } = Components.utils.import('resource://gre/modules/Promise.jsm'
 var sfoaListener = {
 	newMessageSelected: function() {
 		var context = {};
-		return this.scanMessageForAppointment(context).then(function() {
+		return this.scanMessageForAppointment(context).then(() => {
 			return;
-		}).catch(function(e) {
-			console.log(e)
-		});
+		}).catch((e) => console.log(e));
 	},
 
 	get selectedMessageURI() {
@@ -33,7 +31,7 @@ var sfoaListener = {
 
 		aContext = aContext || {};
 		let loader = new StreamMessageLoader(this.selectedMessageURI, aContext);
-		return loader.loadAll().then(function(aContext) {
+		return loader.loadAll().then((aContext) => {
 			return aContext;
 		});
 	},
