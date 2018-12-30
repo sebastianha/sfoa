@@ -1,43 +1,53 @@
 const { Promise } = Components.utils.import('resource://gre/modules/Promise.jsm', {});
 
 var sfoaListener = {
-	tryUpdateCurrentMessage : function() {
+	newMessageSelected: function() {
 		var context = {};
-		return this.shouldApply(context).then((aShouldApply) => {
+		return this.scanMessageForAppointment(context).then(function() {
 			return;
-		}).catch((aError) => console.log(aError));
+		}).catch(function(e) {
+			console.log(e)
+		});
 	},
 
 	get selectedMessageURI() {
 		return gFolderDisplay.selectedMessageUris[0];
 	},
 
-	ensureCurrentMessagePrepared : function(aContext) {
-		if (aContext && aContext.headers)
+	// Load message headers
+	ensureCurrentMessagePrepared: function(aContext) {
+		if (aContext && aContext.headers) {
 			return Promise.resolve(aContext);
+		}
 
 		aContext = aContext || {};
 		let loader = new StreamMessageLoader(this.selectedMessageURI, aContext);
 		return loader.loadHeaders();
 	},
 
+	// Load complete message
 	ensureCurrentMessageLoaded : function(aContext) {
-		if (aContext && aContext.message)
+		if (aContext && aContext.message) {
 			return Promise.resolve(aContext);
+		}
 
 		aContext = aContext || {};
 		let loader = new StreamMessageLoader(this.selectedMessageURI, aContext);
-		return loader.loadAll().then((aContext) => {
+		return loader.loadAll().then(function(aContext) {
 			return aContext;
 		});
 	},
 
-	shouldApply : function(aContext) {
+	MULTIPART_ALTERNATIVE_MATCHER : /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
+
+	scanMessageForAppointment: function(aContext) {
 		return this.ensureCurrentMessagePrepared(aContext).then((aContext) => {
+			// Get button in bar and hide if available
 			var button = document.getElementById("outlook-appointment-button");
 			if(button !== null) {
 				button.style.display = "none";
 			}
+			// Get appointment indicator
 			var elem = document.getElementById("outlook-appointment-outer");
 			elem.style.display = "none";
 			
@@ -51,33 +61,46 @@ var sfoaListener = {
 				
 				if(bodies["text/calendar;"] !== undefined) {
 					console.log("SFOA: Alternative part and calendar entry found");
+
+					// Get calendar entry and reformat to ICS text
 					var calendarEntry = bodies["text/calendar;"][0];
+					// Remove \r line breaks
 					calendarEntry = calendarEntry.replace(/\r/g, "");
+					// Split by line
 					calendarEntry = calendarEntry.split("\n");
+					// Remove first three lines
 					calendarEntry.shift();
 					calendarEntry.shift();
 					calendarEntry.shift();
+					// Remove last three lines
 					calendarEntry.pop();
 					calendarEntry.pop();
 					calendarEntry.pop();
+					// Join lines and convert BASE64 to text
 					calendarEntry = calendarEntry.join("");
 					calendarEntry = atob(calendarEntry);
 
+					// Show indicator and button if available
 					elem.style.display = "block";
 					if(button !== null) {
 						button.style.display = "block";
 					}
 
+					// Download ics file to tmp dir
 					var download = function(e) {
 						// Only left clicks
 						if(e.which === 1) {
 							var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
 							const {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm", {});
-							var file = OS.Path.join(OS.Constants.Path.tmpDir, "sfoa-" + (new Date().getYear()+1900) + (new Date().getMonth()+1) + new Date().getDate() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + ".ics");
-							var downloadPromise = Downloads.createDownload({source: url, target: file});
+
+							// Date in the following format: YYYYMMDDHHMMSS
+							var d = new Date().toISOString().replace(/-/g, "").replace(/T/g, "").replace(/:/g, "").slice(0, 14);
+							var fileName = OS.Path.join(OS.Constants.Path.tmpDir, "sfoa-" + d + ".ics");
+
+							var downloadPromise = Downloads.createDownload({source: url, target: fileName});
 							downloadPromise.then(function success(d) {
 								d.start();
-								alert("Saved ICS: " + file)
+								alert("Saved ICS: " + fileName)
 							});
 						}
 					}
@@ -94,8 +117,6 @@ var sfoaListener = {
 			});
 		});
 	},
-
-	MULTIPART_ALTERNATIVE_MATCHER : /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 
 	collectSameTypeBodies : function(aMessage) {
 		var bodiesWithTypes = {};
@@ -140,7 +161,7 @@ var sfoaListener = {
 
 	onStartHeaders: function() {},
 	onEndHeaders: function() {
-		this.tryUpdateCurrentMessage();
+		this.newMessageSelected();
 	},
 	onEndAttachments: function () {}
 };
@@ -151,19 +172,22 @@ function StreamMessageLoader(aURI, aContext) {
 	this.context = aContext || {};
 }
 StreamMessageLoader.prototype = {
+	// get creates a getter which is called when this.messengerService is being accessed
+	// Singleton pattern used here
 	get messengerService() {
-		if (this._messengerService)
+		if(this._messengerService) {
 			return this._messengerService;
+		}
 		return this._messengerService = messenger.messageServiceFromURI(this.URI).QueryInterface(Ci.nsIMsgMessageService);
 	},
 
-	prepare : function() {
+	prepare: function() {
 		this.context.hdr = this.messengerService.messageURIToMsgHdr(this.URI);
 		this.context.folder = this.context.hdr.folder;
 		return Promise.resolve(this.context);
 	},
 
-	loadHeaders : function() {
+	loadHeaders: function() {
 		return this.prepare().then((aContext) => {
 			return new Promise((aResolve, aReject) => {
 				this._resolverHeaders = aResolve;
@@ -173,22 +197,23 @@ StreamMessageLoader.prototype = {
 		});
 	},
 
-	loadAll : function() {
+	loadAll: function() {
 		return this.prepare().then((aContext) => {
 			return new Promise((aResolve, aReject) => {
-			this._resolverAll = aResolve;
-			this._rejectorAll = aReject;
-			this.messengerService.streamMessage(this.URI, this, null, null, false, null);
+				this._resolverAll = aResolve;
+				this._rejectorAll = aReject;
+				this.messengerService.streamMessage(this.URI, this, null, null, false, null);
 			});
 		});
 	},
 
 	// streamMessage listener
-	QueryInterface : function(iid)  {
-		if (iid.equals(Components.interfaces.nsIStreamListener) || iid.equals(Components.interfaces.nsISupports))
+	QueryInterface: function(iid) {
+		if(iid.equals(Components.interfaces.nsIStreamListener) || iid.equals(Components.interfaces.nsISupports)) {
 			return this;
+		}
 
-	throw Components.results.NS_NOINTERFACE;
+		throw Components.results.NS_NOINTERFACE;
 	},
 
 	onStartRequest : function (aRequest, aContext) {
