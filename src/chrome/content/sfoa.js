@@ -1,7 +1,10 @@
+/// Note: Lines containing 3 slashes will be removed during the build/dist process
+
 const { Promise } = Components.utils.import('resource://gre/modules/Promise.jsm', {});
 
 var sfoaListener = {
 	newMessageSelected: function() {
+		console.log("SFOA: newMessageSelected"); /// Debug
 		var context = {};
 		return this.scanMessageForAppointment(context).then(() => {
 			return;
@@ -9,11 +12,13 @@ var sfoaListener = {
 	},
 
 	get selectedMessageURI() {
+		console.log("SFOA: selectedMessageURI"); /// Debug
 		return gFolderDisplay.selectedMessageUris[0];
 	},
 
 	// Load message headers
 	ensureCurrentMessagePrepared: function(aContext) {
+		console.log("SFOA: ensureCurrentMessagePrepared"); /// Debug
 		if(aContext && aContext.headers) {
 			return Promise.resolve(aContext);
 		}
@@ -25,6 +30,7 @@ var sfoaListener = {
 
 	// Load complete message
 	ensureCurrentMessageLoaded: function(aContext) {
+		console.log("SFOA: ensureCurrentMessageLoaded"); /// Debug
 		if(aContext && aContext.message) {
 			return Promise.resolve(aContext);
 		}
@@ -39,6 +45,7 @@ var sfoaListener = {
 	MULTIPART_ALTERNATIVE_MATCHER: /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 
 	scanMessageForAppointment: function(aContext) {
+		console.log("SFOA: scanMessageForAppointment"); /// Debug
 		return this.ensureCurrentMessagePrepared(aContext).then((aContext) => {
 			// Get appointment indicator
 			var elem = document.getElementById("outlook-appointment-outer");
@@ -80,6 +87,7 @@ var sfoaListener = {
 
 					// Download ics file to tmp dir
 					var download = function(e) {
+						console.log("SFOA: scanMessageForAppointment->download"); /// Debug
 						// Only left clicks
 						if(e.which === 1) {
 							var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
@@ -114,6 +122,7 @@ var sfoaListener = {
 	},
 
 	collectSameTypeBodies: function(aMessage) {
+		console.log("SFOA: collectSameTypeBodies"); /// Debug
 		var bodiesWithTypes = {};
 
 		var header = aMessage.split('\r\n\r\n')[0];
@@ -154,20 +163,26 @@ var sfoaListener = {
 		return bodiesWithTypes;
 	},
 
-	onStartHeaders: function() {},
+	onStartHeaders: function() {
+		console.log("SFOA: onStartHeaders"); /// Debug
+	},
 	onEndHeaders: function() {
+		console.log("SFOA: onEndHeaders"); /// Debug
 		this.newMessageSelected();
 	},
-	onEndAttachments: function() {}
+	onEndAttachments: function() {
+		console.log("SFOA: onEndAttachments"); /// Debug
+	}
 };
 
 
 function StreamMessageLoader(aURI, aContext) {
+	console.log("SFOA: StreamMessageLoader"); /// Debug
 	this.URI = aURI;
 	this.context = aContext || {};
 }
 StreamMessageLoader.prototype = {
-	// get creates a getter which is called when this.messengerService is being accessed
+	// "get" creates a getter which is called when this.messengerService is being accessed
 	// Singleton pattern used here
 	get messengerService() {
 		if(this._messengerService) {
@@ -177,12 +192,14 @@ StreamMessageLoader.prototype = {
 	},
 
 	prepare: function() {
+		console.log("SFOA: StreamMessageLoader->prepare"); /// Debug
 		this.context.hdr = this.messengerService.messageURIToMsgHdr(this.URI);
 		this.context.folder = this.context.hdr.folder;
 		return Promise.resolve(this.context);
 	},
 
 	loadHeaders: function() {
+		console.log("SFOA: StreamMessageLoader->loadHeaders"); /// Debug
 		return this.prepare().then((aContext) => {
 			return new Promise((aResolve, aReject) => {
 				this._resolverHeaders = aResolve;
@@ -193,6 +210,7 @@ StreamMessageLoader.prototype = {
 	},
 
 	loadAll: function() {
+		console.log("SFOA: StreamMessageLoader->loadAll"); /// Debug
 		return this.prepare().then((aContext) => {
 			return new Promise((aResolve, aReject) => {
 				this._resolverAll = aResolve;
@@ -202,16 +220,16 @@ StreamMessageLoader.prototype = {
 		});
 	},
 
-	// streamMessage listener
+	// StreamMessage listener
 	QueryInterface: function(iid) {
 		if(iid.equals(Components.interfaces.nsIStreamListener) || iid.equals(Components.interfaces.nsISupports)) {
 			return this;
 		}
-
 		throw Components.results.NS_NOINTERFACE;
 	},
 
 	onStartRequest: function(aRequest, aContext) {
+		console.log("SFOA: StreamMessageLoader->onStartRequest"); /// Debug
 		if(this._resolverHeaders)
 			this.context.headers = '';
 		if(this._resolverAll)
@@ -219,6 +237,7 @@ StreamMessageLoader.prototype = {
 	},
 
 	onStopRequest: function(aRequest, aContext, aStatusCode) {
+		console.log("SFOA: StreamMessageLoader->onStopRequest"); /// Debug
 		if(this._resolverHeaders) {
 			this._resolverHeaders(this.context);
 			delete this._resolverHeaders;
@@ -232,6 +251,7 @@ StreamMessageLoader.prototype = {
 	},
 
 	onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {
+		console.log("SFOA: StreamMessageLoader->onDataAvailable"); /// Debug
 		var scriptStream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance().QueryInterface(Components.interfaces.nsIScriptableInputStream);
 		scriptStream.init(aInputStream);
 		var data = scriptStream.read(scriptStream.available());
@@ -244,6 +264,7 @@ StreamMessageLoader.prototype = {
 
 // Add message listener on load of Thunderbird
 window.addEventListener("DOMContentLoaded", function onDOMContentLoaded(e) {
+	console.log("SFOA: onDOMContentLoaded"); /// Debug
 	// Register message listener
 	gMessageListeners.push(sfoaListener);
 	// Remove itself to register message listener only once
