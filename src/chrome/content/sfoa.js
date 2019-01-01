@@ -57,15 +57,17 @@ var sfoaListener = {
 			}
 
 			if(!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
-				console.log("SFOA: No alternative part found");
+				console.log("SFOA: No alternative parts found");
 				return false;
 			}
 
 			return this.ensureCurrentMessageLoaded(aContext).then((aContext) => {
 				var bodies = this.collectSameTypeBodies(aContext.message);
+				console.log("SFOA: Alternative parts found: "); /// Debug
+				console.log(bodies); /// Debug
 				
 				if(bodies["text/calendar;"] !== undefined) {
-					console.log("SFOA: Alternative part and calendar entry found");
+					console.log("SFOA: Alternative parts and calendar entry found");
 
 					// Get calendar entry and reformat to ICS text
 					var calendarEntry = bodies["text/calendar;"][0];
@@ -113,7 +115,7 @@ var sfoaListener = {
 						button.onclick = download;
 					}
 				} else {
-					console.log("SFOA: Alternative part but no calendar entry found");
+					console.log("SFOA: Alternative parts but no calendar entry found");
 				}
 
 				return false;
@@ -125,41 +127,55 @@ var sfoaListener = {
 		console.log("SFOA: collectSameTypeBodies"); /// Debug
 		var bodiesWithTypes = {};
 
+		// An empty line separates header from message
 		var header = aMessage.split('\r\n\r\n')[0];
+		// Check if content type is multipart/alternative, store boundary
 		var boundaryMatch = header.match(this.MULTIPART_ALTERNATIVE_MATCHER);
+		// If not found (should be found, as we checked headers) return empty object
 		if(!boundaryMatch)
 			return bodiesWithTypes;
 
-		var boundary = '--' + boundaryMatch[4];
-		var lastPart = [];
-		var checkPart = (function(aPart) {
-			var header = aPart.split('\r\n\r\n')[0];
+		var checkPart = (function(part) {
+			console.log("SFOA: collectSameTypeBodies -> checkPart"); /// Debug
+			// Check header of current part
+			var header = part.split('\r\n\r\n')[0];
 			if(/^Content-Type:[^\r]+(\r\n [^\r]+)*name=.+/im.test(header) || /^Content-Disposition:\s*attachment[^\r]+(\r\n [^\r]+)*filename.+/im.test(header))
 				return; // ignore regular attachments
 
+			// Get type of part and store value in parts object
 			var typeMatch = header.match(/^Content-Type:\s*([^\s]+)\s*/im);
 			if(typeMatch) {
 				let type = typeMatch[1];
 				bodiesWithTypes[type] = bodiesWithTypes[type] || [];
-				bodiesWithTypes[type].push(aPart);
+				bodiesWithTypes[type].push(part);
 			}
 		}).bind(this);
-		
+
+		var boundary = '--' + boundaryMatch[4];
+		var currentPart = [];
 		var inPreAlternativeParts = true;
+		// Scan through message, look by line for boundary
 		aMessage.split('\r\n').forEach((aLine) => {
+			// If not boundary line, add to current part
 			if(aLine != boundary) {
-				lastPart.push(aLine)
+				currentPart.push(aLine)
 				return;
 			}
 			if(inPreAlternativeParts) {
+				// The first boundary match is in header, so ignore it
 				inPreAlternativeParts = false;
 			} else {
-				checkPart(lastPart.join('\r\n'));
+				// Part is complete, so check it
+				checkPart(currentPart.join('\r\n'));
 			}
-			lastPart = [];
+			// Empty current part
+			currentPart = [];
 		});
 		
-		checkPart(lastPart.join('\r\n'));
+		// After last boundary one part is left (does not match exactly due to "--" at end). Check it, too
+		checkPart(currentPart.join('\r\n'));
+		
+		// Return parts object
 		return bodiesWithTypes;
 	},
 
