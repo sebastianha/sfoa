@@ -31,6 +31,10 @@ Either click the button or the image to save the ICS file in your temp directory
 
 ![Screenshot](/images/alert.png?raw=true "Confirmation message")
 
+### Tested Platforms
+
+This addon has been currently tested only on Linux using Thunderbird 60.3.0 64bit. Let me know if it works on your system.
+
 ### Installing
 
 Just install the latest XPI from the dist folder by using "Install Add-On From File" in Thunderbird in the addons tab.
