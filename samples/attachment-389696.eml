@@ -1,0 +1,381 @@
+Return-Path: <eayorind@cisco.com>
+Received: from rhea.aerovironment.com ([192.168.20.116]) by
+          hermes.aerovironment.com (Netscape Messaging Server 4.15) with
+          ESMTP id KMZL9400.O0K for <baffoni@avinc.com>; Sat, 18 Jul 2009
+          09:46:16 -0700 
+Received: from spam1.aerovironment.com ([192.168.102.6]) by
+          rhea.aerovironment.com (Netscape Messaging Server 4.15) with
+          SMTP id KMZL8N00.B30 for <baffoni@avinc.com>; Sat, 18 Jul 2009
+          09:45:59 -0700 
+Received: From spam1.aerovironment.com ([192.168.102.6]) by spam1.aerovironment.com (WebShield SMTP v4.5 MR3)
+	id 1247935582695; Sat, 18 Jul 2009 09:46:22 -0700
+Received: from filter01.aerovironment.com ([192.168.102.35]) by spam1.aerovironment.com with Microsoft SMTPSVC(6.0.3790.3959);
+	 Sat, 18 Jul 2009 09:46:21 -0700
+Received: from rtp-iport-2.cisco.com (rtp-iport-2.cisco.com [64.102.122.149])
+	by filter01.aerovironment.com (Postfix) with ESMTP id 2793118F3DD;
+	Sat, 18 Jul 2009 09:46:22 -0700 (PDT)
+X-Files: meeting.ics : 3762
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: Ai0FAK+YYUpAZnme/2dsb2JhbACCJC+yD4gjNAQFjzsFgj0QBYE6iT8
+X-IronPort-AV: E=Sophos;i="4.43,227,1246838400"; 
+   d="ics'?scan'208,217";a="50852765"
+Received: from rtp-dkim-1.cisco.com ([64.102.121.158])
+  by rtp-iport-2.cisco.com with ESMTP; 18 Jul 2009 16:46:22 +0000
+Received: from rtp-core-1.cisco.com (rtp-core-1.cisco.com [64.102.124.12])
+	by rtp-dkim-1.cisco.com (8.12.11/8.12.11) with ESMTP id n6IGkLuY022202;
+	Sat, 18 Jul 2009 12:46:21 -0400
+Received: from xbh-rtp-211.amer.cisco.com (xbh-rtp-211.cisco.com [64.102.31.102])
+	by rtp-core-1.cisco.com (8.13.8/8.14.3) with ESMTP id n6IGkLkJ002325;
+	Sat, 18 Jul 2009 16:46:21 GMT
+Received: from xmb-rtp-206.amer.cisco.com ([64.102.31.32]) by xbh-rtp-211.amer.cisco.com with Microsoft SMTPSVC(6.0.3790.3959);
+	 Sat, 18 Jul 2009 12:46:21 -0400
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+Content-class: urn:content-classes:calendarmessage
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="----_=_NextPart_001_01CA07C7.4779F6F0"
+Subject: Updated: UC Design Session - Cisco/AV
+Date: Sat, 18 Jul 2009 12:46:20 -0400
+Message-ID: <E72829AF5184704299FB6AB398B15E4B0523D152@xmb-rtp-206.amer.cisco.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: UC Design Session - Cisco/AV
+Thread-Index: AcoDhJHYgKPqY6gfTSOkloifbNmj9QEQrTrw
+From: "Esther Ayorinde (eayorind)" <eayorind@cisco.com>
+To: <mmylenbu@cisco.com>, "Jennifer Boicic (jboicic)" <jboicic@cisco.com>,
+        "Baffoni, Michael" <baffoni@avinc.com>, <vlahos@avinc.com>,
+        <baum@avinc.com>
+X-OriginalArrivalTime: 18 Jul 2009 16:46:21.0668 (UTC) FILETIME=[47B91A40:01CA07C7]
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; l=10568; t=1247935581; x=1248799581;
+	c=relaxed/simple; s=rtpdkim1001;
+	h=Content-Type:From:Subject:Content-Transfer-Encoding:MIME-Version;
+	d=cisco.com; i=eayorind@cisco.com;
+	z=From:=20=22Esther=20Ayorinde=20(eayorind)=22=20<eayorind@c
+	isco.com>
+	|Subject:=20Updated=3A=20UC=20Design=20Session=20-=20Cisco/
+	AV
+	|Sender:=20
+	|To:=20Michael=22=20<baffoni@avinc.com>;
+	bh=IiAsdUZPRDuQm6LvlJ0kHMxYqwGNcGGTMCqjdU/75CA=;
+	b=nynW6xRRtw/fjak2WcSYY8NsS1wl9Djzm4SQg0tym+sIi21NFqlFNSxkd4
+	tl7+CU5n0ZI4XFS9FzUib/oXc6GP/Sev78Nz+QGFOyk7k/QAFpncoG3TeJHv
+	6nVKvUQSt4;
+Authentication-Results: rtp-dkim-1; header.From=eayorind@cisco.com; dkim=pass (
+	sig from cisco.com/rtpdkim1001 verified; ); 
+Return-Path: eayorind@cisco.com
+
+This is a multi-part message in MIME format.
+
+------_=_NextPart_001_01CA07C7.4779F6F0
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Team,
+
+Please let me know if this time works for you to discuss specific design =
+for AV.
+
+Thanks,
+
+Esther A
+
+
+Esther Ayorinde invites you to an online meeting using WebEx.
+
+Meeting Number: xxx xxx xxx
+Meeting Password: avcollaboration
+
+-------------------------------------------------------
+To join this meeting
+-------------------------------------------------------
+1. Go to https://ciscosales.webex.com/ciscosales/j.php?J=xxxxxxxxxxx
+2. Enter the meeting password: avcollaboration
+3. Click "Join Now".
+4. Follow the instructions that appear on your screen to join the =
+teleconference.
+
+----------------------------------------------------------------
+ALERT:Toll-Free Dial Restrictions for (408) and (919) Area Codes
+----------------------------------------------------------------
+
+As of April 9th, 2009, you can no longer dial toll free in the 408 or =
+919 area codes in the United States.  The affected toll free numbers =
+are: (866) 432-9903 for the San Jose/Milpitas area and (866) 349-3520 =
+for the RTP area.
+
+Please dial the local access number for your area from the list below:
+-  San Jose/Milpitas (408) area:  525-6800
+-  RTP (919) area:  392-3330
+
+-------------------------------------------------------=20
+To join the teleconference only=20
+-------------------------------------------------------=20
+1. Dial into Cisco WebEx (view all Global Access Numbers at=20
+http://cisco.com/en/US/about/doing_business/conferencing/index.html=20
+2. Press 3 to attend the meeting.=20
+3. Follow the prompts to enter the Meeting Number (listed above) or =
+Access Code followed by the # sign.=20
+
+San Jose, CA: +1.408.525.6800  RTP: +1.919.392.3330=20
+
+US/Canada: +1.866.432.9903  United Kingdom: +44.20.8824.0117=20
+
+India: +91.80.4350.1111  Germany: +49.619.6773.9002=20
+
+Japan: +81.3.5763.9394  China: +86.10.8515.5666=20
+
+%iPhoneJoinMeetingDesc%
+
+http://www.webex.com=20
+We've got to start meeting like this(TM)
+
+
+------_=_NextPart_001_01CA07C7.4779F6F0
+Content-Type: text/html;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV=3D"Content-Type" CONTENT=3D"text/html; =
+charset=3DISO-8859-1">
+<META NAME=3D"Generator" CONTENT=3D"MS Exchange Server version =
+6.5.7654.12">
+<TITLE>Updated: UC Design Session - Cisco/AV</TITLE>
+</HEAD>
+<BODY>
+<!-- Converted from text/rtf format -->
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Team,</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Please let me know if this time works =
+for you to discuss specific design for AV.</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Thanks,</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Esther A</FONT>
+</P>
+<BR>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Esther Ayorinde invites you to an =
+online meeting using WebEx.</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Meeting Number: xxx xxx xxx</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">Meeting Password: =
+avcollaboration</FONT>
+</P>
+
+<P><FONT SIZE=3D2 =
+FACE=3D"Arial">-------------------------------------------------------</F=
+ONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">To join this meeting</FONT>
+
+<BR><FONT SIZE=3D2 =
+FACE=3D"Arial">-------------------------------------------------------</F=
+ONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">1. Go to <A =
+HREF=3D"https://ciscosales.webex.com/ciscosales/j.php?J=xxxxxxxxxxx">http=
+s://ciscosales.webex.com/ciscosales/j.php?J=xxxxxxxxxxx</A></FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">2. Enter the meeting password: =
+pass</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">3. Click &quot;Join Now&quot;.</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">4. Follow the instructions that appear =
+on your screen to join the teleconference.</FONT>
+</P>
+
+<P><FONT SIZE=3D2 =
+FACE=3D"Arial">----------------------------------------------------------=
+------</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">ALERT:Toll-Free Dial Restrictions for =
+(408) and (919) Area Codes</FONT>
+
+<BR><FONT SIZE=3D2 =
+FACE=3D"Arial">----------------------------------------------------------=
+------</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">As of April 9th, 2009, you can no =
+longer dial toll free in the 408 or 919 area codes in the United =
+States.&nbsp; The affected toll free numbers are: (866) 432-9903 for the =
+San Jose/Milpitas area and (866) 349-3520 for the RTP area.</FONT></P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Please dial the local access number for =
+your area from the list below:</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">-&nbsp; San Jose/Milpitas (408) =
+area:&nbsp; 525-6800</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">-&nbsp; RTP (919) area:&nbsp; =
+392-3330</FONT>
+</P>
+
+<P><FONT SIZE=3D2 =
+FACE=3D"Arial">------------------------------------------------------- =
+</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">To join the teleconference only =
+</FONT>
+
+<BR><FONT SIZE=3D2 =
+FACE=3D"Arial">------------------------------------------------------- =
+</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">1. Dial into Cisco WebEx (view all =
+Global Access Numbers at </FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial"><A =
+HREF=3D"http://cisco.com/en/US/about/doing_business/conferencing/index.ht=
+ml">http://cisco.com/en/US/about/doing_business/conferencing/index.html</=
+A> </FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">2. Press 3 to attend the meeting. =
+</FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">3. Follow the prompts to enter the =
+Meeting Number (listed above) or Access Code followed by the # sign. =
+</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">San Jose, CA: +1.408.525.6800&nbsp; =
+RTP: +1.919.392.3330 </FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">US/Canada: +1.866.432.9903&nbsp; United =
+Kingdom: +44.20.8824.0117 </FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">India: +91.80.4350.1111&nbsp; Germany: =
++49.619.6773.9002 </FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">Japan: +81.3.5763.9394&nbsp; China: =
++86.10.8515.5666 </FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial">%iPhoneJoinMeetingDesc%</FONT>
+</P>
+
+<P><FONT SIZE=3D2 FACE=3D"Arial"><A =
+HREF=3D"http://www.webex.com">http://www.webex.com</A> </FONT>
+
+<BR><FONT SIZE=3D2 FACE=3D"Arial">We've got to start meeting like =
+this(TM)</FONT>
+</P>
+
+</BODY>
+</HTML>
+------_=_NextPart_001_01CA07C7.4779F6F0
+Content-class: urn:content-classes:calendarmessage
+Content-Type: text/calendar;
+	name="meeting.ics";
+	method=REQUEST
+Content-Transfer-Encoding: quoted-printable
+
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:Microsoft CDO for Microsoft Exchange
+VERSION:2.0
+BEGIN:VEVENT
+DTSTAMP:20090718T164620Z
+DTSTART:20090723T170000Z
+SUMMARY:Updated: UC Design Session - Cisco/AV
+UID:040000008200E00074C5B7101A82E0080000000090EA72E54903CA010000000000000=
+00
+ 010000000C3C66BE143FCC44A9EC6902D1BE254BA
+ATTENDEE;ROLE=3DREQ-PARTICIPANT;PARTSTAT=3DNEEDS-ACTION;X-REPLYTIME=3D160=
+21023T00
+ 1800Z;RSVP=3DTRUE;CN=3D"Baffoni, Michael":MAILTO:baffoni@avinc.com
+ORGANIZER;CN=3D"Esther Ayorinde (eayorind)":MAILTO:eayorind@cisco.com
+LOCATION:via Webex
+DTEND:20090723T180000Z
+DESCRIPTION:Team\,\N\NPlease let me know if this time works for you to di=
+sc
+ uss specific design for AV.\N\NThanks\,\N\NEsther A\N\N\NEsther Ayorinde=
+ i
+ nvites you to an online meeting using WebEx.\N\NMeeting Number: xxx xxx =
+xxx\NMeeting Password: pass\N\N--------------------------------=
+--
+ ---------------------\NTo join this meeting\N---------------------------=
+--
+ --------------------------\N1. Go to https://ciscosales.webex.com/ciscos=
+al
+ es/j.php?J=xxxxxxxx\N2. Enter the meeting password: avcollaboration\N=
+3. C
+ lick "Join Now".\N4. Follow the instructions that appear on your screen =
+to
+  join the teleconference.\N\N-------------------------------------------=
+--
+ -------------------\NALERT:Toll-Free Dial Restrictions for (408) and (91=
+9)
+  Area Codes\N-----------------------------------------------------------=
+--
+ ---\N\NAs of April 9th\, 2009\, you can no longer dial toll free in the =
+40
+ 8 or 919 area codes in the United States.  The affected toll free number=
+s=20
+ are: (866) 432-9903 for the San Jose/Milpitas area and (866) 349-3520 fo=
+r=20
+ the RTP area.\N\NPlease dial the local access number for your area from =
+th
+ e list below:\N-  San Jose/Milpitas (408) area:  525-6800\N-  RTP (919) =
+ar
+ ea:  392-3330\N\N-------------------------------------------------------=
+ \
+ NTo join the teleconference only \N-------------------------------------=
+--
+ ---------------- \N1. Dial into Cisco WebEx (view all Global Access Numb=
+er
+ s at \Nhttp://cisco.com/en/US/about/doing_business/conferencing/index.ht=
+ml
+  \N2. Press 3 to attend the meeting. \N3. Follow the prompts to enter th=
+e=20
+ Meeting Number (listed above) or Access Code followed by the # sign. \N\=
+NS
+ an Jose\, CA: +1.408.525.6800  RTP: +1.919.392.3330 \N\NUS/Canada: +1.86=
+6.
+ 432.9903  United Kingdom: +44.20.8824.0117 \N\NIndia: +91.80.4350.1111  =
+Ge
+ rmany: +49.619.6773.9002 \N\NJapan: +81.3.5763.9394  China: +86.10.8515.=
+56
+ 66 \N\N%iPhoneJoinMeetingDesc%\N\Nhttp://www.webex.com \NWe've got to st=
+ar
+ t meeting like this(TM)\N\N
+SEQUENCE:3
+PRIORITY:5
+CLASS:
+CREATED:20090718T164621Z
+LAST-MODIFIED:20090718T164621Z
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-INSTTYPE:0
+X-MICROSOFT-CDO-INTENDEDSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-CDO-IMPORTANCE:1
+X-MICROSOFT-CDO-OWNERAPPTID:-1387497511
+X-MICROSOFT-CDO-APPT-SEQUENCE:3
+X-MICROSOFT-CDO-ATTENDEE-CRITICAL-CHANGE:20090718T164620Z
+X-MICROSOFT-CDO-OWNER-CRITICAL-CHANGE:20090718T164620Z
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=3DSTART:-PT00H15M00S
+END:VALARM
+END:VEVENT
+END:VCALENDAR
+
+------_=_NextPart_001_01CA07C7.4779F6F0--
+

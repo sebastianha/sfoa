@@ -70,10 +70,8 @@ var sfoaListener = {
 				console.log("SFOA: Alternative or mixed parts found: "); /// Debug
 				console.log(bodies); /// Debug
 
-				var type = "alternative";
 				if(bodies["multipart/alternative;"] !== undefined) {
 					console.log("SFOA: Mixed parts found: "); /// Debug
-					type = "mixed";
 					var bodies = this.collectSameTypeBodies(bodies["multipart/alternative;"][0]);
 				}
 
@@ -102,18 +100,15 @@ var sfoaListener = {
 						}
 					}
 
-					if(type === "alternative") {
-						// Join lines and convert BASE64 to text
-						calendarEntry = newCalendarEntry.join("");
-						calendarEntry = atob(calendarEntry);
-					}
-
-					if(type === "mixed") {
+					// Join lines and convert BASE64 to text if needed
+					try {
+						calendarEntry = atob(newCalendarEntry.join(""));
+					} catch(e) {
 						// Join lines, message is email text
 						calendarEntry = newCalendarEntry.join("\n");
 						// From https://codepen.io/netsi1964/pen/ZYNPNz
 						calendarEntry = calendarEntry.replace(/=(..)/g, function(v) { return String.fromCharCode(parseInt(v.replace("=",""), 16)) });
-						calendarEntry = calendarEntry.replace(/=\n/g, "")
+						calendarEntry = calendarEntry.replace(/=\n/g, "");
 					}
 
 					// Download ics file to tmp dir
