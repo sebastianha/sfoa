@@ -43,6 +43,7 @@ var sfoaListener = {
 	},
 
 	MULTIPART_ALTERNATIVE_MATCHER: /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
+	MULTIPART_MIXED_MATCHER: /^(Content-Type:\s*)multipart\/mixed(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 
 	scanMessageForAppointment: function(aContext) {
 		console.log("SFOA: scanMessageForAppointment"); /// Debug
@@ -56,36 +57,64 @@ var sfoaListener = {
 				button.style.display = "none";
 			}
 
-			if(!this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers)) {
-				console.log("SFOA: No alternative parts found");
+			aContext.mixedFound = this.MULTIPART_MIXED_MATCHER.test(aContext.headers);
+			aContext.alternativeFound = this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers);
+
+			if(!aContext.alternativeFound && !aContext.mixedFound) {
+				console.log("SFOA: No alternative or mixed parts found");
 				return false;
 			}
 
 			return this.ensureCurrentMessageLoaded(aContext).then((aContext) => {
 				var bodies = this.collectSameTypeBodies(aContext.message);
-				console.log("SFOA: Alternative parts found: "); /// Debug
+				console.log("SFOA: Alternative or mixed parts found: "); /// Debug
 				console.log(bodies); /// Debug
-				
+
+				var type = "alternative";
+				if(bodies["multipart/alternative;"] !== undefined) {
+					console.log("SFOA: Mixed parts found: "); /// Debug
+					type = "mixed";
+					var bodies = this.collectSameTypeBodies(bodies["multipart/alternative;"][0]);
+				}
+
 				if(bodies["text/calendar;"] !== undefined) {
 					console.log("SFOA: Alternative parts and calendar entry found");
 
 					// Get calendar entry and reformat to ICS text
 					var calendarEntry = bodies["text/calendar;"][0];
+
 					// Remove \r line breaks
 					calendarEntry = calendarEntry.replace(/\r/g, "");
 					// Split by line
 					calendarEntry = calendarEntry.split("\n");
-					// Remove first three lines
-					calendarEntry.shift();
-					calendarEntry.shift();
-					calendarEntry.shift();
-					// Remove last three lines
-					calendarEntry.pop();
-					calendarEntry.pop();
-					calendarEntry.pop();
-					// Join lines and convert BASE64 to text
-					calendarEntry = calendarEntry.join("");
-					calendarEntry = atob(calendarEntry);
+					// Get body from part
+					var newCalendarEntry = [];
+					var record = false;
+					for(var i=0; i<calendarEntry.length; i++) {
+						if(record === true) {
+							newCalendarEntry.push(calendarEntry[i]);
+						}
+						if(record === true && calendarEntry[i] === "") {
+							break;
+						}
+						if(record === false && calendarEntry[i] === "") {
+							record = true;
+						}
+					}
+
+					if(type === "alternative") {
+						// Join lines and convert BASE64 to text
+						calendarEntry = newCalendarEntry.join("");
+						calendarEntry = atob(calendarEntry);
+					}
+
+					if(type === "mixed") {
+						// Join lines, message is email text
+						calendarEntry = newCalendarEntry.join("\n");
+						// From https://codepen.io/netsi1964/pen/ZYNPNz
+						calendarEntry = calendarEntry.replace(/=(..)/g, function(v) { return String.fromCharCode(parseInt(v.replace("=",""), 16)) });
+						calendarEntry = calendarEntry.replace(/=\n/g, "")
+					}
 
 					// Download ics file to tmp dir
 					var download = function(e) {
@@ -123,17 +152,22 @@ var sfoaListener = {
 		});
 	},
 
-	collectSameTypeBodies: function(aMessage) {
+	collectSameTypeBodies: function(message) {
 		console.log("SFOA: collectSameTypeBodies"); /// Debug
 		var bodiesWithTypes = {};
 
 		// An empty line separates header from message
-		var header = aMessage.split('\r\n\r\n')[0];
+		var header = message.split('\r\n\r\n')[0];
 		// Check if content type is multipart/alternative, store boundary
 		var boundaryMatch = header.match(this.MULTIPART_ALTERNATIVE_MATCHER);
 		// If not found (should be found, as we checked headers) return empty object
-		if(!boundaryMatch)
-			return bodiesWithTypes;
+		if(!boundaryMatch) {
+			// IF not alternative check if type is mixed, store boundary
+			boundaryMatch = header.match(this.MULTIPART_MIXED_MATCHER);
+			if(!boundaryMatch) {
+				return bodiesWithTypes;
+			}
+		}
 
 		var checkPart = (function(part) {
 			console.log("SFOA: collectSameTypeBodies -> checkPart"); /// Debug
@@ -155,7 +189,7 @@ var sfoaListener = {
 		var currentPart = [];
 		var inPreAlternativeParts = true;
 		// Scan through message, look by line for boundary
-		aMessage.split('\r\n').forEach((aLine) => {
+		message.split('\r\n').forEach((aLine) => {
 			// If not boundary line, add to current part
 			if(aLine != boundary) {
 				currentPart.push(aLine)
