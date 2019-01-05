@@ -39,6 +39,8 @@ This addon has been currently tested only on Linux using Thunderbird 60.3.0 64bi
 
 Just install the latest XPI from the dist folder by using "Install Add-On From File" in Thunderbird in the addons tab.
 
+After installing only the banner hint for an ICS attachment will be shown. To add the corresponding button to the tab bar, you have to customize the buttons by right clicking. Then drag and drop the blue button at the place you like.
+
 ### Thanks
 
 Thanks to all the available extensions out there where I could take a look how things work. But a special thanks goes to the "Rescue Conflicting Alternatives" (https://github.com/clear-code/tb-rescue-conflicting-alternatives) extension which was the base for this one.
