@@ -28,6 +28,8 @@ Message-ID:
  <TEST.EURP190.PROD.OUTLOOK.COM>
 Accept-Language: de-DE, en-US
 Content-Language: de-DE
+x-ms-exchange-calendar-series-instance-id:
+ AAAAAAAAAABBBBBBBBBBCCCCCCCCCCDDDDDDDDDDEEEEEEEEEEFFFFFFFFFFGGGGGGGGGGHHHHH=
 Content-Type: multipart/alternative;
 	boundary="_000_TEST0258BADCB1F8180C3FC2E6BF0TESTEURP_"
 MIME-Version: 1.0
