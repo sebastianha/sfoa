@@ -61,6 +61,6 @@ If you like this extension and want to support me, I am happy to receive donatio
 
 ### License
 
-Copyright (c) 2018 Sebastian Hammerl
+Copyright (c) 2019 Sebastian Hammerl
 
 This Software is licensed under the GPL V3
