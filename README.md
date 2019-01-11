@@ -41,6 +41,8 @@ Just install the latest XPI from the dist folder by using "Install Add-On From F
 
 After installing only the banner hint for an ICS attachment will be shown. To add the corresponding button to the tab bar, you have to customize the buttons by right clicking. Then drag and drop the blue button at the place you like.
 
+This Addon is also available on https://addons.thunderbird.net/de/thunderbird/addon/sfoa/
+
 ### Thanks
 
 Thanks to all the available extensions out there where I could take a look how things work. But a special thanks goes to the "Rescue Conflicting Alternatives" (https://github.com/clear-code/tb-rescue-conflicting-alternatives) extension which was the base for this one.
@@ -57,7 +59,7 @@ There is so much to do. First this extension needs more testing. I only tested w
 
 ### Support Me
 
-If you like this extension and want to support me, I am happy to receive donations via PayPal: donate@omoco.de
+If you like this extension and want to support me, I am happy to receive donations via PayPal: donate@omoco.de / https://www.paypal.me/omoco
 
 ### License
 
