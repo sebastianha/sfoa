@@ -42,12 +42,12 @@ var sfoaListener = {
 		});
 	},
 
+	MULTIPART_ALTERNATIVE_MATCHER: /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
+	MULTIPART_MIXED_MATCHER: /^(Content-Type:\s*)multipart\/mixed(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 	HEADER_CALENDAR_HINT_MATCHER: [
 		/^x-ms-exchange-calendar-series-instance-id:/im,
 		/^Content-class: urn:content-classes:calendarmessage/im
 	],
-	MULTIPART_ALTERNATIVE_MATCHER: /^(Content-Type:\s*)multipart\/alternative(;\s*boundary=(['"]?)([^\s]+)\3)/im,
-	MULTIPART_MIXED_MATCHER: /^(Content-Type:\s*)multipart\/mixed(;\s*boundary=(['"]?)([^\s]+)\3)/im,
 
 	scanMessageForAppointment: function(aContext) {
 		console.log("SFOA:   scanMessageForAppointment"); /// Debug
@@ -69,15 +69,15 @@ var sfoaListener = {
 					break;
 				}
 			}
-			if(hintLineFound === false) {
-				console.log("SFOA: No calendar hint found in header");
+
+			var alternativeFound = this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers);
+			if(!hintLineFound && !alternativeFound) {
+				console.log("SFOA: No calendar hint or alternative parts found in header");
 				return false;
 			}
 
-			aContext.mixedFound = this.MULTIPART_MIXED_MATCHER.test(aContext.headers);
-			aContext.alternativeFound = this.MULTIPART_ALTERNATIVE_MATCHER.test(aContext.headers);
-
-			if(!aContext.alternativeFound && !aContext.mixedFound) {
+			var mixedFound = this.MULTIPART_MIXED_MATCHER.test(aContext.headers);
+			if(!alternativeFound && !mixedFound) {
 				console.log("SFOA: No alternative or mixed parts found in header");
 				return false;
 			}

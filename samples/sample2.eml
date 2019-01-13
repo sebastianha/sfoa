@@ -1,0 +1,84 @@
+Return-Path: <a@test.de>
+Delivered-To: b@test.de
+Received: from localhost (localhost [127.0.0.1])
+	by mail.test.de (Postfix) with ESMTP id XXXXXXXXXX
+	for <b@test.de>; Tue,  8 Jan 2019 16:16:11 +0100 (CET)
+Received: from mail.test.de ([127.0.0.1])
+	by localhost (mail.test.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XXXXXXXXXXXX for <b@test.de>;
+	Tue,  8 Jan 2019 16:16:10 +0100 (CET)
+Received: from test.mailcontrol.com (test.mailcontrol.com [127.0.0.1])
+	by mail.test.de (Postfix) with ESMTPS id XXXXXXXXXX
+	for <b@test.de>; Tue,  8 Jan 2019 16:16:09 +0100 (CET)
+Received: from test.mailgw.local (mail.test..net [127.0.0.1])
+	by test.mailcontrol.com (MailControl) with ESMTPS id XXXXXXXXXXXXXX
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL)
+	for <b@test.de>; Tue, 8 Jan 2019 15:16:08 GMT
+Received: from mail.test.de ([127.0.0.1]) by test.mailgw.local with ESMTP id XXXXXXXXXXXXXXXX (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NO) for <b@test.de>; Tue, 08 Jan 2019 16:16:04 +0100 (CET)
+Received: from mail.test.de (127.0.0.1) by test.test.de
+ (127.0.0.1) with Microsoft SMTP Server (TLS) id 14.3.408.0; Tue, 8 Jan
+ 2019 16:16:05 +0100
+Received: from test.test.de ([127.0.0.1]) by test.test.de
+ ([127.0.0.1]) with mapi id 14.03.0415.000; Tue, 8 Jan 2019 16:16:05 +0100
+From: "A" <a@test.de>
+To: "C" <c@test.de>,
+        "b@test.de" <b@test.de>
+Subject: Test Appointment2
+Date: Tue, 8 Jan 2019 15:16:04 +0000
+Message-ID: <XXXXXXXX0DB0DD4C9DF17E3019737222338E177C@test.test.de>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+Content-Type: multipart/alternative;
+	boundary="_000_68FA86210DB0DD4C9DF17E3019737222338E177Ctesttest_"
+MIME-Version: 1.0
+
+--_000_68FA86210DB0DD4C9DF17E3019737222338E177Ctesttest_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+--_000_68FA86210DB0DD4C9DF17E3019737222338E177Ctesttest_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40">
+<head>
+</head>
+<body lang=3D"DE" link=3D"#0563C1" vlink=3D"#954F72">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><span style=3D"font-size:10.0pt;font-family:&quot;Ar=
+ial&quot;,sans-serif"><o:p>test</o:p></span></p>
+</div>
+</body>
+</html>
+
+--_000_68FA86210DB0DD4C9DF17E3019737222338E177Ctesttest_
+Content-Type: text/calendar; charset="utf-8"; method=REQUEST
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSCk1FVEhPRDpSRVFVRVNUClBST0RJRDpNaWNyb3NvZnQgRXhjaGFuZ2Ug
+U2VydmVyIDIwMTAKVkVSU0lPTjoyLjAKQkVHSU46VlRJTUVaT05FClRaSUQ6Q2VudHJhbCBFdXJv
+cGUgU3RhbmRhcmQgVGltZQpCRUdJTjpTVEFOREFSRApEVFNUQVJUOjE2MDEwMTAxVDAzMDAwMApU
+Wk9GRlNFVEZST006KzAyMDAKVFpPRkZTRVRUTzorMDEwMApSUlVMRTpGUkVRPVlFQVJMWTtJTlRF
+UlZBTD0xO0JZREFZPS0xU1U7QllNT05USD0xMApFTkQ6U1RBTkRBUkQKQkVHSU46REFZTElHSFQK
+RFRTVEFSVDoxNjAxMDEwMVQwMjAwMDAKVFpPRkZTRVRGUk9NOiswMTAwClRaT0ZGU0VUVE86KzAy
+MDAKUlJVTEU6RlJFUT1ZRUFSTFk7SU5URVJWQUw9MTtCWURBWT0tMVNVO0JZTU9OVEg9MwpFTkQ6
+REFZTElHSFQKRU5EOlZUSU1FWk9ORQpCRUdJTjpWRVZFTlQKT1JHQU5JWkVSO0NOPUE6TUFJTFRP
+OmFAdGVzdC5kZQpBVFRFTkRFRTtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1ORUVEUy1B
+Q1RJT047UlNWUD1UUlVFO0NOPUI6TUFJTFRPOgogYkB0ZXN0LmRlCkFUVEVOREVFO1JPTEU9UkVR
+LVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPVRSVUU7Q049QzpNQUlMVE86
+CiBjQHRlc3QuZGUKREVTQ1JJUFRJT047TEFOR1VBR0U9ZGUtREU6Ly8gVGVzdCBBcHBvaW50bWVu
+dApVSUQ6RjlGMTk5RkQtOThGQi00MTlELTk4NkQtRkYxODY5QUNBRjg5ClNVTU1BUlk7TEFOR1VB
+R0U9ZGUtREU6VGVzdCBBcHBvaW50bWVudApEVFNUQVJUO1RaSUQ9Q2VudHJhbCBFdXJvcGUgU3Rh
+bmRhcmQgVGltZToyMDE5MDEwMlQxNDAwMDAKRFRFTkQ7VFpJRD1DZW50cmFsIEV1cm9wZSBTdGFu
+ZGFyZCBUaW1lOjIwMTkwMTAyVDE0MzAwMApDTEFTUzpQVUJMSUMKUFJJT1JJVFk6NQpEVFNUQU1Q
+OjIwMTgxMjIwVDEwMTY1MFoKVFJBTlNQOk9QQVFVRQpTVEFUVVM6Q09ORklSTUVEClNFUVVFTkNF
+OjEKTE9DQVRJT047TEFOR1VBR0U9ZGUtREU6YmVpIEMKQkVHSU46VkFMQVJNCkRFU0NSSVBUSU9O
+OlJFTUlOREVSClRSSUdHRVI7UkVMQVRFRD1TVEFSVDotUFQ1TQpBQ1RJT046RElTUExBWQpFTkQ6
+VkFMQVJNCkVORDpWRVZFTlQKRU5EOlZDQUxFTkRBUgo=
+
+--_000_68FA86210DB0DD4C9DF17E3019737222338E177Ctesttest_--
