@@ -1,5 +1,5 @@
-SFOA – Show F*cking Outlook Appointments for Thunderbird
-========================================================
+Show Outlook Appointments (vcal / ics)
+======================================
 
 For a long time I did not even know that Outlook silently sends calendar appointments via email and how all this works. In the last year more and more colleagues and customers of my company started using Outlook for appointments and I wondered always about empty emails or emails which do not make sense at all.
 
@@ -13,7 +13,7 @@ As I am not using Lighting and am not willing to install a huge extension only t
 
 I hacked together this Thunderbird extension without knowing much about Thunderbird extensions at all. So I copied code from various other exentions and made it work somehow. I could not find any up-to-date tutorials or documentation of the extension api so I only can hope that my code does what it should.
 
-Don't blame me if something goes horribly wrong when using this exension. I did not dive deep into Thunderbird extensions, I did not read RFCs and I don't know if there are any side effects.
+Don’t blame me if something goes horribly wrong when using this exension. I did not dive deep into Thunderbird extensions, I did not read RFCs and I don’t know if there are any side effects.
 
 Help me by testing, reviewing and supporting this extension. Fork and create merge requests, I am happy to learn and willing to fix my mistakes.
 
@@ -23,7 +23,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 When opening a message the content is scanned for alternative parts. This btw is the reason Thunderbird does not display the calendar entry. Normally an appointment consists of three parts: text, html and calendar which are all marked as alternatives. Therefore according to RFCs only one has to be shown and Thunderbird prefers text or html.
 
-When found, a button "Download ICS" is shown (has to be added by customizing the bar first) and a large image is shown in the header bar of the message.
+When found, a button “Download ICS” is shown (has to be added by customizing the bar first) and a large image is shown in the header bar of the message.
 
 ![Screenshot](/images/bar.png?raw=true "Message bar with button and image")
 
@@ -33,19 +33,19 @@ Either click the button or the image to save the ICS file in your temp directory
 
 ### Tested Platforms
 
-This addon has been currently tested only on Linux using Thunderbird 60.3.0 64bit. Let me know if it works on your system.
+This addon has been currently tested only on Linux using Thunderbird 60.3.0 64-bit. Let me know if it works on your system.
 
 ### Installing
 
-Just install the latest XPI from the dist folder by using "Install Add-On From File" in Thunderbird in the addons tab.
+Just install the latest XPI from the dist folder by using "Install Add-On From File" in Thunderbird in the `Add-ons Manager` tab.
 
 After installing only the banner hint for an ICS attachment will be shown. To add the corresponding button to the tab bar, you have to customize the buttons by right clicking. Then drag and drop the blue button at the place you like.
 
-This Addon is also available on https://addons.thunderbird.net/de/thunderbird/addon/sfoa/
+This Add-on is also available on https://addons.thunderbird.net/addon/sfoa/
 
 ### Thanks
 
-Thanks to all the available extensions out there where I could take a look how things work. But a special thanks goes to the "Rescue Conflicting Alternatives" (https://github.com/clear-code/tb-rescue-conflicting-alternatives) extension which was the base for this one.
+Thanks to all the available extensions out there where I could take a look how things work. But a special thanks goes to the “Rescue Conflicting Alternatives” (https://github.com/clear-code/tb-rescue-conflicting-alternatives) extension which was the base for this one.
 
 ### ToDo
 
@@ -55,7 +55,7 @@ There is so much to do. First this extension needs more testing. I only tested w
 * Upload to Mozilla Extension DB
 * Localize
 * Show folder selector when saving ICS
-* ...
+* …
 
 ### Support Me
 
