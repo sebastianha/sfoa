@@ -3,11 +3,15 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>sfoa@omoco.de</em:id>
-		<em:name>Show F*cking Outlook Appointments</em:name>
+		<em:name>Show Outlook Appointments</em:name>
+		<em:description>Display embedded Outlook calendar (vcal/ics) attachments</em:description>
 		<em:version>0.2.3</em:version>
 		<em:creator>Sebastian Hammerl</em:creator>
-		<em:description>A Thunderbird extension to show embedded Outlook calendar parts</em:description>
+		<em:translator>Sebastian Hammerl (en-US)</em:translator>
+		<em:translator>Óvári (hu)</em:translator>
 		<em:iconURL>chrome://sfoa/content/outlook-appointment-icon.png</em:iconURL>
+
+		<!-- Target Application - Thunderbird -->
 		<em:targetApplication>
 			<Description>
 				<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
@@ -15,5 +19,16 @@
 				<em:maxVersion>60.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
+	
+		<!-- Hungarian -->
+		<em:localized>
+			<Description>
+					<em:locale>hu</em:locale>
+					<em:name>Outlook-találkozók megjelenítése (Show Outlook Appointments)</em:name>
+					<em:description>A beágyazott Outlook naptár (vcal/ics) mellékletek megjelenítése</em:description>
+			</Description>
+		</em:localized>	
+
 	</Description>
+		
 </RDF>
