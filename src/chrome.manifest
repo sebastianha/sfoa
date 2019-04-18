@@ -1,2 +1,7 @@
 content sfoa chrome/content/
+
+# locale (default listed first, then alphabetically by locale)
+locale   sofa   en-US  chrome/locale/en-US/
+locale   sofa   hu     chrome/locale/hu/
+
 overlay chrome://messenger/content/messenger.xul chrome://sfoa/content/sfoa.xul
