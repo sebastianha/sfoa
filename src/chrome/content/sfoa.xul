@@ -3,7 +3,7 @@
 	<script type="application/javascript" src="chrome://sfoa/content/sfoa.js"/>
 
 	<toolbar id="header-view-toolbar">
-		<toolbarbutton removable="true" id="outlook-appointment-button" class="toolbarbutton-1 msgHeaderView-button" label="Download ICS" tooltiptext="Download attached Outlook appointment" style="display: none; background-color: #0071c5; color: white; list-style-image: url('chrome://sfoa/content/outlook-appointment-button.svg');"/>
+		<toolbarbutton removable="true" id="outlook-appointment-button" class="toolbarbutton-1 msgHeaderView-button" label="&toolbar.download.label;" tooltiptext="&toolbar.download.tooltiptext;" style="display: none; background-color: #0071c5; color: white; list-style-image: url('chrome://sfoa/content/outlook-appointment-button.svg');"/>
 	</toolbar>
 
 	<hbox id="expandedHeadersBottomBox">
