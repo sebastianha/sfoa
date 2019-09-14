@@ -1,4 +1,8 @@
 <?xml version="1.0"?>
+<!DOCTYPE window [
+	<!ENTITY % buttonsDTD SYSTEM "chrome://sfoa/chrome/locale/sfoa.dtd"> %buttonsDTD;
+]>
+
 <overlay id="sfoa" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/javascript" src="chrome://sfoa/content/sfoa.js"/>
 
