@@ -1,3 +1,8 @@
+IMPORTANT NOTICE
+================
+The latest Thunderbird 68 Update breaks the compatibility with this plugin. Therefore I do have to rewrite the complete plugin which is currently not planned in the near future.
+
+
 SFOA – Show F*cking Outlook Appointments for Thunderbird
 ========================================================
 
