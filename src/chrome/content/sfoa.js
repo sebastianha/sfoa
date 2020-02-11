@@ -135,15 +135,25 @@ var sfoaListener = {
 						if(e.which === 1) {
 							var url = "data:text/calendar;charset=utf8," + escape(calendarEntry);
 							const {Downloads} = Cu.import("resource://gre/modules/Downloads.jsm", {});
+							var FileUtils = Cu.import("resource://gre/modules/FileUtils.jsm").FileUtils
 
 							// Date in the following format: YYYYMMDDHHMMSS
 							var d = new Date().toISOString().replace(/-/g, "").replace(/T/g, "").replace(/:/g, "").slice(0, 14);
 							var fileName = OS.Path.join(OS.Constants.Path.tmpDir, "sfoa-" + d + ".ics");
 
 							var downloadPromise = Downloads.createDownload({source: url, target: fileName});
-							downloadPromise.then(function success(d) {
-								d.start();
-								alert("Saved ICS: " + fileName)
+							downloadPromise.then(async function onFulfill(d){
+								var res = d.whenSucceeded();
+
+								await d.start();
+
+								console.log("SFOA:  Saved ICS: " + fileName); /// Debug
+								var nsifile = new FileUtils.File( fileName );
+								if (nsifile.exists()){
+									nsifile.launch();
+								} else {
+									alert("no file");
+								}
 							});
 						}
 					}
@@ -217,10 +227,10 @@ var sfoaListener = {
 			// Empty current part
 			currentPart = [];
 		});
-		
+
 		// After last boundary one part is left (does not match exactly due to "--" at end). Check it, too
 		checkPart(currentPart.join('\r\n'));
-		
+
 		// Return parts object
 		return bodiesWithTypes;
 	},
