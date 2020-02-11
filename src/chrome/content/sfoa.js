@@ -148,12 +148,7 @@ var sfoaListener = {
 								await d.start();
 
 								console.log("SFOA:  Saved ICS: " + fileName); /// Debug
-								var nsifile = new FileUtils.File( fileName );
-								if (nsifile.exists()){
-									nsifile.launch();
-								} else {
-									alert("no file");
-								}
+								new FileUtils.File( fileName ).launch();
 							});
 						}
 					}
